@@ -1,0 +1,5 @@
+<launch>
+	<group ns ="navigation">
+		<node pkg="navigation_nova" name="navigation_compass" type="compass.py"/>
+</group>
+</launch>
