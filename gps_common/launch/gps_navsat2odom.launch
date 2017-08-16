@@ -1,0 +1,12 @@
+<launch>
+
+    <arg name="gps_dev" default="/dev/ttyUSB0"/>
+    <node pkg="gpsd_client" name="gpsd_client" type="gpsd_client" output="screen">
+        <param name="host" value="localhost"/>
+        <param name="port" value="4000"/>
+        <param name="dev" value="$(arg gps_dev)"/>
+    </node>
+    <node pkg="gps_common" name="utm_odometry_node" type="utm_odometry_node" output="screen"/>
+
+</launch>
+
