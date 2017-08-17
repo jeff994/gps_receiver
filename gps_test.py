@@ -1,7 +1,12 @@
 import serial
 import rospy
 from time import sleep
+from gpsmath import *
 
+lonold = 0
+latold = 0
+lon_init = ""
+lat_init = ""
 # rospy.init_node("gps_node")
 ser = serial.Serial()
 
@@ -36,6 +41,7 @@ def time_Conversion(timeStr):
 		return "%10s time error"%"Time:"
 
 def latlon_Conversion(latlonArray):
+	global lonold, latold, lon_init, lat_init
 	if len(latlonArray) == 4:
 		if len(latlonArray[0]) == 10 and len(latlonArray[2]) == 11:
 			lat = latlonArray[0]
@@ -52,9 +58,22 @@ def latlon_Conversion(latlonArray):
 			lonPole = latlonArray[3]
 			if lonPole == 'W':
 				longitude = longitude * -1
-			latString = "%10s %.10f"%("Latitude:",latitude)
+			latString = "%10s %.10f\n"%("Latitude:",latitude)
 			lonString = "%10s %.10f\n"%("Longitude:",longitude)
-			locationString = lonString + latString
+			if lon_init == "" and lat_init == "":
+				lon_init = longitude
+				lat_init = latitude
+			else:
+				pass
+			dist_from_init = haversine(lon_init, lat_init, longitude, latitude)
+			dist_from_init = dist_from_init / 1000.0
+			distInitString = "%10s %.10f m"%("Dist from init: ", dist_from_init)
+			speed = haversine(longitude, latitude, lonold, latold)
+			speed = speed / 1000.0
+			speedString = "%10s %.10f m"%("Speed: ", speed)
+			locationString = lonString + latString + speedString
+			latold = latitude
+			lonold = longitude
 			return locationString
 		else:
 			return "%10s lat lon error"%"Location:"

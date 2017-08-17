@@ -1,0 +1,9 @@
+1. To obtain both NavSatFix msg and Odom msg
+	- run the file in this path "gps_common >> launch >> gps_activate_launchfile.sh"
+		$ ./gps_activate_launchfile.sh
+
+2. To obtain only NavSatFix msg
+	- run the file in this path "gpsd_client >> launch >> gps_activate_launchfile.sh"
+		$ ./gps_activate_launchfile.sh
+
+*for both .sh scripts, please check the ID_SERIAL refers to the GPS module that you are currently using
