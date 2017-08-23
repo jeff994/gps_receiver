@@ -5,8 +5,12 @@ from gpsmath import *
 
 lonold = 0
 latold = 0
-lon_init = ""
-lat_init = ""
+#lon_init = ""
+#lat_init = ""
+lon_init = 103.8715875
+lat_init = 1.327803167
+#lon_init = 103.8710175
+#lat_init = 1.327023167
 # rospy.init_node("gps_node")
 ser = serial.Serial()
 
@@ -70,8 +74,8 @@ def latlon_Conversion(latlonArray):
 			distInitString = "%10s %.10f m"%("Dist from init: ", dist_from_init)
 			speed = haversine(longitude, latitude, lonold, latold)
 			speed = speed / 1000.0
-			speedString = "%10s %.10f m"%("Speed: ", speed)
-			locationString = lonString + latString + speedString
+			speedString = "%10s %.10f m\n"%("Speed: ", speed)
+			locationString = lonString + latString + speedString + distInitString
 			latold = latitude
 			lonold = longitude
 			return locationString
