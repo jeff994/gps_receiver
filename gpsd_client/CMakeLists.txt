@@ -28,6 +28,10 @@ include_directories(${catkin_INCLUDE_DIRS} ${libgps_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} src/client.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${libgps_LIBRARIES})
 
+include_directories(${catkin_INCLUDE_DIRS} ${libgps_INCLUDE_DIRS})
+add_executable(dump src/gps_dumper.cpp)
+target_link_libraries(dump ${catkin_LIBRARIES} ${libgps_LIBRARIES})
+
 #############
 ## Install ##
 #############

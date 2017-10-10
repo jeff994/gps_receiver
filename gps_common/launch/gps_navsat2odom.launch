@@ -6,7 +6,12 @@
         <param name="port" value="4000"/>
         <param name="dev" value="$(arg gps_dev)"/>
     </node>
-    <node pkg="gps_common" name="utm_odometry_node" type="utm_odometry_node" output="screen"/>
+    <node pkg="gpsd_client" name="coord_conversion" type="coord_conversion.py"/>
+    <node pkg="gps_common" name="utm_odometry_node" type="utm_odometry_node" output="screen">
+    	<remap from="odom" to="gps_ekf"/>
+    	<param name="rot_covariance" value="99999.0"/>
+    	<param name="frame_id" value="base_footprint"/>
+    </node>
 
 </launch>
 

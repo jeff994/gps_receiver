@@ -33,7 +33,7 @@ class GPSDClient {
 
     bool start() {
       gps_fix_pub = node.advertise<GPSFix>("extended_fix", 1);
-      navsat_fix_pub = node.advertise<NavSatFix>("fix", 1);
+      navsat_fix_pub = node.advertise<NavSatFix>("conv_fix", 1);
 
       privnode.getParam("use_gps_time", use_gps_time);
       privnode.getParam("check_fix_by_variance", check_fix_by_variance);
