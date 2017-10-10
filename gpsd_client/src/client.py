@@ -1,7 +1,9 @@
+#!/usr/bin/env python
+
 import serial
 import rospy
 from time import sleep
-from sensor_msgs.msg import GPSFix
+from gps_common.msg import GPSFix
 
 ser = serial.Serial()
 f = GPSFix()
@@ -119,7 +121,7 @@ def printData(List):
 
 if __name__ == '__main__':
 	rospy.init_node('gps_client')
-	gps_pub = rospy.Publisher('extend_fix', GPSFix, queue_size = 10)
+	gps_pub = rospy.Publisher('extended_fix', GPSFix, queue_size = 10)
 	try:
 		while open_Serial() and not rospy.is_shutdown():
 		
